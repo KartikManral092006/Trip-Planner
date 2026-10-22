@@ -4,6 +4,8 @@ A multi-agent travel planner built with LangGraph. Agents research transport,
 stays, and activities on the web; **Python code** calculates the budget and
 checks the plan; an LLM reviews quality; and **you** approve or request changes.
 
+**Live site:** [trip-planner-orcin-two.vercel.app](https://trip-planner-orcin-two.vercel.app)
+
 ## How it works
 
 ```mermaid
