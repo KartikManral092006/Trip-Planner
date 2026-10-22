@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: trip-planner-api
+    runtime: python
+    plan: free
+    buildCommand: pip install uv && uv sync --frozen --no-dev
+    startCommand: uv run --no-dev uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: TAVILY_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        value: groq:qwen/qwen3.8-27b
+      - key: ALLOWED_ORIGINS
+        sync: false

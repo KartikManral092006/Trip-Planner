@@ -84,6 +84,27 @@ a run that failed (the failure message prints the exact command).
 uv run pytest
 ```
 
+## Deploying
+
+The React app goes on Vercel and the API on Render. A plan runs in the
+background for several minutes, which needs a server that keeps running.
+
+**API on Render**
+
+1. In Render, create a **Blueprint** from this repository. It reads `render.yaml`.
+2. Set `GROQ_API_KEY` and `TAVILY_API_KEY` when asked.
+3. Check `https://<your-api>.onrender.com/health` returns `{"status":"ok"}`.
+
+**Frontend on Vercel**
+
+1. Import the repository and set **Root Directory** to `frontend-react` (Vite is detected).
+2. Add the environment variable `VITE_API_URL=https://<your-api>.onrender.com`.
+3. Deploy, then set `ALLOWED_ORIGINS=https://<your-app>.vercel.app` on Render so the
+   browser is allowed to call the API.
+
+Free tiers have limits: the Groq free tier covers only a few trips a day, and a
+free Render service may sleep when idle and loses `checkpoints.sqlite` on restart.
+
 ## API
 
 | Method | Path | Description |

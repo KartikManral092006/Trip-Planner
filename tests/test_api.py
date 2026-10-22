@@ -103,3 +103,22 @@ def test_retry_continues_failed_trip(monkeypatch):
 
     assert response.status_code == 202
     assert retried == ["abc"]
+
+
+def test_allowed_origins_default_to_local_frontends(monkeypatch):
+    from main import allowed_origins
+
+    monkeypatch.delenv("ALLOWED_ORIGINS", raising=False)
+    assert "http://localhost:5173" in allowed_origins()
+
+
+def test_allowed_origins_come_from_environment(monkeypatch):
+    from main import allowed_origins
+
+    monkeypatch.setenv("ALLOWED_ORIGINS", "https://trip-planner.vercel.app/, https://example.com")
+    assert allowed_origins() == ["https://trip-planner.vercel.app", "https://example.com"]
+
+
+def test_local_frontend_passes_cors():
+    response = client.get("/health", headers={"Origin": "http://localhost:5173"})
+    assert response.headers["access-control-allow-origin"] == "http://localhost:5173"
