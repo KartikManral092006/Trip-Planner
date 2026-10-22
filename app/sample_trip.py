@@ -1,0 +1,15 @@
+SAMPLE_TRIP = {
+    "origin": "Dehradun",
+    "destination": "Goa",
+    "start_date": "2026-12-10",
+    "end_date": "2026-12-13",
+    "budget": 30000,
+    "travelers": 2,
+    "interests": ["beaches", "food", "nightlife"],
+    "currency": "INR",
+    "accommodation_type": "hotel",
+    "transport_preference": ["train", "flight"],
+    "food_preference": "non-vegetarian",
+    "pace": "moderate",
+    "special_requirements": "",
+}
